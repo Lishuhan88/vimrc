@@ -587,6 +587,8 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap tt :CocCommand explorer<CR> 
 nnoremap th :CocCommand translator.popup<CR>
+
+let g:coc_snippet_next =  '<c-n>'
+let g:coc_snippet_prev =  '<c-p>'
 imap <C-y> <Plug>(coc-snippets-expand-jump)
 let g:snips_author = 'lsh'
-autocmd CursorHold * silent call CocActionAsync('highlight')
