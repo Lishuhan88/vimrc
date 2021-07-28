@@ -4,7 +4,7 @@
     "suggest.enablePreselect":false,
     "snippets.ultisnips.directories":[
         "UltiSnips",
-        "#HOME/.vim/UltiSnips/",
+        "$HOME/.vim/UltiSnips/",
         "$HOME/.vim/plugged/vim-snippets/UltiSnips"
     ],
 
