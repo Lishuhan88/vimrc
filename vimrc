@@ -588,7 +588,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 nnoremap tt :CocCommand explorer<CR> 
 nnoremap th :CocCommand translator.popup<CR>
 
-let g:coc_snippet_next =  '<c-n>'
-let g:coc_snippet_prev =  '<c-p>'
+let g:coc_snippet_next =  '<c-j>'
+let g:coc_snippet_prev =  '<c-k>'
 imap <C-y> <Plug>(coc-snippets-expand-jump)
 let g:snips_author = 'lsh'
