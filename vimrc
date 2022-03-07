@@ -71,6 +71,8 @@ set nofoldenable         " 禁用折叠代码
 set tw=0
 set indentexpr=
 set autochdir
+"解决o携带注释插入下一行的问题
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 代码补全
@@ -153,6 +155,10 @@ endif
 "键位映射如下：
 "设置空格为leader键
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"把原有q键的宏录制功能改到\键
+"\键在vim键盘布局里是未使用任何功能的(原leader键)
+noremap \ q
+
 map s <nop>
 map S :wall<CR>
 map Q :qall<CR>
@@ -391,7 +397,7 @@ nnoremap <F5> :UndotreeToggle<CR>
 let g:tagbar_width = 30
 let g:tagbar_autofocus = 1                                "这是tagbar一打开，光标即在tagbar页面内，默认在vim打开的文件内
 let g:tagbar_sort = 0                                         "设置标签不排序，默认排序
-nnoremap <silent> <leader>t :TagbarToggle<cr>
+nnoremap T :TagbarToggle<cr>
 
 " ===
 " === echodoc.vim 在命令行显示函数提示
