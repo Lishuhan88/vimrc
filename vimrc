@@ -40,10 +40,10 @@ set termguicolors	 "开启真彩
 let g:indentLine_enabled = 1	"开启代码对齐线
 set scrolloff=5		 "光标移动到buffer的顶部和底部时保持5行距离
 
-" 添加“\键”为代码折叠
+" 添加“,键”为代码折叠
 set foldmethod=indent
 set foldlevel=99
-nnoremap , za
+nnoremap <LEADER>, za
 "代码折叠
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set foldmethod=syntax       "设置基于语法进行代码折叠
@@ -63,7 +63,7 @@ set tabstop=4            " 设置编辑时制表符占用空格数
 set shiftwidth=4         " 设置格式化时制表符占用空格数
 set softtabstop=4        " 设置4个空格为制表符
 set smarttab             " 在行和段开始处使用制表符
-set nowrap               " 禁止折行
+"set nowrap               " 禁止折行
 set backspace=2          " 使用回车键正常处理indent,eol,start等
 set sidescroll=10        " 设置向右滚动字符数
 set nofoldenable         " 禁用折叠代码
@@ -73,7 +73,6 @@ set indentexpr=
 set autochdir
 "解决o携带注释插入下一行的问题
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 代码补全
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -88,7 +87,8 @@ exec "nohlsearch"
 set incsearch           " 开启实时搜索功能
 set ignorecase          " 搜索时大小写不敏感
 set smartcase           " 开启只能大小写
-noremap <LEADER><CR> :nohlsearch<CR>    "空格+回车键 取消搜索关键词高亮
+" 空格+回车键 取消搜索关键词高亮
+noremap <LEADER><CR> :nohlsearch<CR>    
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 缓存设置
@@ -163,15 +163,41 @@ map s <nop>
 map S :wall<CR>
 map Q :qall<CR>
 map q :q<CR>
-map W :source $MYVIMRC<CR>
+"map W :source $MYVIMRC<CR>
 nnoremap <leader>rc :edit ~/.vim/vimrc<CR>
 
+
 "快速移动光标
-noremap U K     "把U改为帮助
+"把U改为帮助
+noremap U K    
 noremap K 5k
 noremap J 5j
-noremap H 7h
-noremap L 7l
+
+" 按H移动到相对行首
+noremap <silent> H ^
+" 按L移动到行尾
+noremap <silent> L $
+
+" 快速行内移动
+noremap W 5w
+noremap B 5b
+
+"缩进
+nnoremap < <<
+nnoremap > >>
+
+"Ctrl + U或E将在不移动光标的情况下向上/向下移动视图端口
+noremap <C-k> 5<C-y>
+noremap <C-j> 5<C-e>
+
+" ===
+" === 在底行模式下移动光标
+" ===
+cnoremap <C-k> <Up>
+cnoremap <C-j> <Down>
+cnoremap <C-h> <Left>
+cnoremap <C-l> <Right>
+
 
 "分屏
 map zl :set splitright<CR>:vsplit<CR>
@@ -184,11 +210,13 @@ nnoremap sj <c-w>j
 nnoremap sk <c-w>k
 nnoremap sh <c-w>h
 nnoremap sl <c-w>l
+nnoremap sw <c-w>w
+
 
 
 "调节分屏的大小
-"map <up> :res +5<CR>
-"map <down> :res -5<CR>
+map <up> :res +5<CR>
+map <down> :res -5<CR>
 map <left> :vertical resize-5<CR>
 map <right> :vertical resize+5<CR>
 
@@ -196,10 +224,10 @@ map <right> :vertical resize+5<CR>
 map zv <C-w>t<C-w>H
 map zg <C-w>t<C-w>K
 
-"tabe标签的创建与移动
-"nnoremap tn :tabe<CR>    "tabe new
-"nnoremap th :-tabnext<CR>
-"nnoremap tl :+tabnext<CR>
+"tab标签的创建与移动
+nnoremap tn :tabe<CR>    "tab new
+nnoremap th :-tabnext<CR>
+nnoremap tl :+tabnext<CR>
 nnoremap <c-l> :bn<CR>    
 nnoremap <c-h> :bp<CR>    
 nnoremap <leader>1 :b1<CR>
@@ -211,8 +239,11 @@ nnoremap <leader>6 :b6<CR>
 nnoremap <leader>7 :b7<CR>
 nnoremap <leader>8 :b8<CR>
 nnoremap <leader>9 :b9<CR>
+"tab delete
+nnoremap td :bd<CR> 
 
-nnoremap td :bd<CR>
+"map <LEADER>fd /\(\<\w\+\>\)\_s*\1
+
 
 "粘贴模式的选择
 map zp :set paste<CR>
@@ -222,11 +253,10 @@ map zy :set nopaste<CR>
 
 "在可视模式下大写Y拷贝到系统剪贴板
 vnoremap Y "+y
-vnoremap P "+p
 
 "代码补全的时候默认只出现在下方
-map zu :set completeopt+=preview<CR>
-map zn :set completeopt-=preview<CR>
+map st :set completeopt+=preview<CR>
+map sb :set completeopt-=preview<CR>
 
 
 " Press space twice to jump to the next '' and edit it
@@ -234,6 +264,8 @@ map zn :set completeopt-=preview<CR>
 
 " Call figlet
 map tx :r !figlet 
+
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "配色方案
@@ -268,6 +300,8 @@ Plug 'ryanoasis/vim-devicons'
 
 "函数列表插件
 Plug 'preservim/tagbar'
+" Taglist
+Plug 'liuchengxu/vista.vim'
 
 "多光标插件
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -278,7 +312,7 @@ Plug 'RRethy/vim-illuminate'
 "辅助粘贴板
 Plug 'junegunn/vim-peekaboo'
 
-"增加、替换配对符的插件
+"增加、替换配对符的插件 cs({ change string 把括号换成大括号 ds(删除括号
 Plug 'tpope/vim-surround'
 
 "快速注释代码插件
@@ -365,7 +399,7 @@ colorscheme solarized8
 " === 文件树插件
 " ===
 " Nerdtree
-nnoremap <silent> <leader>n :NERDTreeToggle<cr>
+nnoremap  tt :NERDTreeToggle<cr>
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
@@ -393,11 +427,33 @@ nnoremap <F5> :UndotreeToggle<CR>
 " ===
 " === vim-tagbar
 " ===
-" tagbar
+"tagbar
 let g:tagbar_width = 30
-let g:tagbar_autofocus = 1                                "这是tagbar一打开，光标即在tagbar页面内，默认在vim打开的文件内
+let g:tagbar_autoclose = 0
+let g:tagbar_autofocus = 1          "这是tagbar一打开，光标即在tagbar页面内，默认在vim打开的文件内
 let g:tagbar_sort = 0                                         "设置标签不排序，默认排序
 nnoremap T :TagbarToggle<cr>
+
+" ===
+" === Vista.vim
+" ===
+"noremap <LEADER>v :Vista!!<CR>
+"noremap <c-t> :silent! Vista finder coc<CR>
+"let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+"let g:vista_default_executive = 'coc'
+"let g:vista_fzf_preview = ['right:50%']
+"let g:vista#renderer#enable_icon = 1
+"let g:vista#renderer#icons = {
+"\   "function": "\uf794",
+"\   "variable": "\uf71b",
+"\  }
+" function! NearestMethodOrFunction() abort
+" 	return get(b:, 'vista_nearest_method_or_function', '')
+" endfunction
+" set statusline+=%{NearestMethodOrFunction()}
+" autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+"
+"let g:scrollstatus_size = 15
 
 " ===
 " === echodoc.vim 在命令行显示函数提示
@@ -409,15 +465,15 @@ let g:echodoc_enable_at_startup = 1
 " === easymotion
 " ===
 "光标快速跳转插件
-map <Leader> <Plug>(easymotion-prefix)
+map <leader> <Plug>(easymotion-prefix)
 let g:EasyMotion_smartcase = 1
-"新版本中默认设置为<leader><leader> 为了避免于其他插件冲突 我的<leader>j <leader>k都空着的 不冲突
+"新版本中默认设置为<leader><leader> 为了避免于其他插件冲突 我设置s
 map <leader>w <Plug>(easymotion-bd-w)   
 nmap <leader>w <Plug>(easymotion-overwin-w)
-map <Leader>l <Plug>(easymotion-lineforward)
-map <Leader>h <Plug>(easymotion-linebackward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+map <leader>l <Plug>(easymotion-lineforward)
+map <leader>h <Plug>(easymotion-linebackward)
+map <leader>j <Plug>(easymotion-j)
+map <leader>k <Plug>(easymotion-k)
 "let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 
 
@@ -500,17 +556,23 @@ endif
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+" 去到上一个警告
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
+" 去到下一个警告
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
+" 转到定义
 nmap <silent> gd <Plug>(coc-definition)
+" 转到类型定义
 nmap <silent> gy <Plug>(coc-type-definition)
+" 清单实施
 nmap <silent> gi <Plug>(coc-implementation)
+" 列出参数资料
 nmap <silent> gr <Plug>(coc-references)
 
-" Use <leader>K to show documentation in preview window.
-nnoremap <silent> <leader>K :call <SID>show_documentation()<CR>
+" 在预览窗口中显示文档
+nnoremap <silent> <leader>U :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -525,12 +587,12 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Symbol renaming.
+" 重命名变量
 nmap <leader>rn <Plug>(coc-rename)
 
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" 格式化选中的代码
+xmap <leader>c  <Plug>(coc-format-selected)
+nmap <leader>c  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -550,7 +612,7 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
-" Map function and class text objects
+" 在可视模式下if选中函数体，ic选中类或结构体
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
 xmap if <Plug>(coc-funcobj-i)
 omap if <Plug>(coc-funcobj-i)
@@ -591,10 +653,11 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap tt :CocCommand explorer<CR> 
-nnoremap th :CocCommand translator.popup<CR>
+"nnoremap tt :CocCommand explorer<CR> 
+"nnoremap tf :CocCommand translator.popup<CR>
 
-let g:coc_snippet_next =  '<c-j>'
-let g:coc_snippet_prev =  '<c-k>'
-imap <C-y> <Plug>(coc-snippets-expand-jump)
-let g:snips_author = 'lsh'
+"let g:coc_snippet_next =  '<leader>j'
+"let g:coc_snippet_prev =  '<leader>k'
+"imap <c-y> <Plug>(coc-snippets-expand-jump)
+"let g:snips_author = 'lsh'
+
