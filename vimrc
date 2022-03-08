@@ -228,19 +228,223 @@ map zg <C-w>t<C-w>K
 nnoremap tn :tabe<CR>    "tab new
 nnoremap th :-tabnext<CR>
 nnoremap tl :+tabnext<CR>
-nnoremap <c-l> :bn<CR>    
-nnoremap <c-h> :bp<CR>    
-nnoremap <leader>1 :b1<CR>
-nnoremap <leader>2 :b2<CR>
-nnoremap <leader>3 :b3<CR>
-nnoremap <leader>4 :b4<CR>
-nnoremap <leader>5 :b5<CR>
-nnoremap <leader>6 :b6<CR>
-nnoremap <leader>7 :b7<CR>
-nnoremap <leader>8 :b8<CR>
-nnoremap <leader>9 :b9<CR>
-"tab delete
-nnoremap td :bd<CR> 
+
+" ===
+" === buffer的相关操作
+" ===
+map ] <nop>
+nnoremap ]a<leader> :b1<CR>
+nnoremap ]s<leader> :b2<CR>
+nnoremap ]d<leader> :b3<CR>
+nnoremap ]f<leader> :b4<CR>
+nnoremap ]g<leader> :b5<CR>
+nnoremap ]h<leader> :b6<CR>
+nnoremap ]j<leader> :b7<CR>
+nnoremap ]k<leader> :b8<CR>
+nnoremap ]l<leader> :b9<CR>
+nnoremap ]a;<leader> :b10<CR>
+nnoremap ]aa<leader> :b11<CR>
+nnoremap ]as<leader> :b12<CR>
+nnoremap ]ad<leader> :b13<CR>
+nnoremap ]af<leader> :b14<CR>
+nnoremap ]ag<leader> :b15<CR>
+nnoremap ]ah<leader> :b16<CR>
+nnoremap ]aj<leader> :b17<CR>
+nnoremap ]ak<leader> :b18<CR>
+nnoremap ]al<leader> :b19<CR>
+nnoremap ]s;<leader> :b20<CR>
+nnoremap ]sa<leader> :b21<CR>
+nnoremap ]ss<leader> :b22<CR>
+nnoremap ]sd<leader> :b23<CR>
+nnoremap ]sf<leader> :b24<CR>
+nnoremap ]sg<leader> :b25<CR>
+nnoremap ]sh<leader> :b26<CR>
+nnoremap ]sj<leader> :b27<CR>
+nnoremap ]sk<leader> :b28<CR>
+nnoremap ]sl<leader> :b29<CR>
+nnoremap ]d;<leader> :b30<CR>
+
+if exists("g:vim_buffer_loaded")
+    finish
+endif
+
+let g:vim_buffer_loaded = 1
+
+command! -nargs=0 PreviousBuffer :call <sid>previous_buffer()
+command! -nargs=0 NextBuffer :call <sid>next_buffer()
+command! -nargs=0 CloseBuffer :call <sid>close_buffer()
+command! -nargs=0 BufOnly :call <sid>buf_only()
+
+" 切换到上一个buffer
+function! s:previous_buffer()
+    execute ":bp"
+endfunction
+
+" 切换到下一个buffer
+function! s:next_buffer()
+    execute ":bn"
+endfunction
+
+" 关闭buffer
+function! s:close_buffer()
+    let win_count = <sid>get_window_count()
+    if win_count > 1
+        call <sid>close_current_window()
+    else
+        call <sid>close_current_buffer()
+    endif
+endfunction
+
+" 关闭其余buffer
+function! s:buf_only()
+    let curr = <sid>get_current_buffer_number()
+    let last = <sid>get_last_buffer_number()
+    let n = 1
+
+    while n <= last
+        if n != curr && <sid>is_exist_buffer(n)
+            call <sid>go_to_buffer(n)
+            call <sid>close_buffer_by_number(n)
+        endif
+        let n += 1
+    endwhile
+endfunction
+
+" 获得窗口总数
+function! s:get_window_count()
+    return winnr('$')
+endfunction
+
+" 获得当前buffer编号
+function! s:get_current_buffer_number()
+    return bufnr("%")
+endfunction
+
+" 获得最后一个buffer编号
+function! s:get_last_buffer_number()
+    return bufnr("$")
+endfunction
+
+" 判断是否存在buffer
+function! s:is_exist_buffer(num)
+    return buflisted(a:num)
+endfunction
+
+" 关闭当前窗口
+function! s:close_current_window()
+    execute ":close"
+endfunction
+
+" 关闭当前buffer
+function! s:close_current_buffer()
+    execute ":bd"
+endfunction
+
+" 关闭buffer
+function! s:close_buffer_by_number(num)
+    silent execute ":bd " . a:num
+endfunction
+
+" 切换到buffer
+function! s:go_to_buffer(num)
+    silent execute ":bn " . a:num
+endfunction
+
+nnoremap <c-h> :PreviousBuffer<cr>
+nnoremap <c-l> :NextBuffer<cr>
+nnoremap td :bd<cr>
+nnoremap tD :BufOnly<cr>
+
+" ===
+" === Vim综合征。。。
+" ===
+map ' <nop>
+map [ <nop>
+noremap , '
+
+nnoremap [a<leader> 1k
+nnoremap [s<leader> 2k
+nnoremap [d<leader> 3k
+nnoremap [f<leader> 4k
+nnoremap [g<leader> 5k
+nnoremap [h<leader> 6k
+nnoremap [j<leader> 7k
+nnoremap [k<leader> 8k
+nnoremap [l<leader> 9k
+nnoremap [a;<leader> 10k
+nnoremap [aa<leader> 11k
+nnoremap [as<leader> 12k
+nnoremap [ad<leader> 13k
+nnoremap [af<leader> 14k
+nnoremap [ag<leader> 15k
+nnoremap [ah<leader> 16k
+nnoremap [aj<leader> 17k
+nnoremap [ak<leader> 18k
+nnoremap [al<leader> 19k
+nnoremap [s;<leader> 20k
+nnoremap [sa<leader> 21k
+nnoremap [ss<leader> 22k
+nnoremap [sd<leader> 23k
+nnoremap [sf<leader> 24k
+nnoremap [sg<leader> 25k
+nnoremap [sh<leader> 26k
+nnoremap [sj<leader> 27k
+nnoremap [sk<leader> 28k
+nnoremap [sl<leader> 29k
+nnoremap [d;<leader> 30k
+nnoremap [da<leader> 31k
+nnoremap [ds<leader> 32k
+nnoremap [dd<leader> 33k
+nnoremap [df<leader> 34k
+nnoremap [dg<leader> 35k
+nnoremap [dh<leader> 36k
+nnoremap [dj<leader> 37k
+nnoremap [dk<leader> 38k
+nnoremap [dl<leader> 39k
+nnoremap [f;<leader> 40k
+
+nnoremap 'a<leader> 1j
+nnoremap 's<leader> 2j
+nnoremap 'd<leader> 3j
+nnoremap 'f<leader> 4j
+nnoremap 'g<leader> 5j
+nnoremap 'h<leader> 6j
+nnoremap 'j<leader> 7j
+nnoremap 'k<leader> 8j
+nnoremap 'l<leader> 9j
+nnoremap 'a;<leader> 10j
+nnoremap 'aa<leader> 11j
+nnoremap 'as<leader> 12j
+nnoremap 'ad<leader> 13j
+nnoremap 'af<leader> 14j
+nnoremap 'ag<leader> 15j
+nnoremap 'ah<leader> 16j
+nnoremap 'aj<leader> 17j
+nnoremap 'ak<leader> 18j
+nnoremap 'al<leader> 19j
+nnoremap 's;<leader> 20j
+nnoremap 'sa<leader> 21j
+nnoremap 'ss<leader> 22j
+nnoremap 'sd<leader> 23j
+nnoremap 'sf<leader> 24j
+nnoremap 'sg<leader> 25j
+nnoremap 'sh<leader> 26j
+nnoremap 'sj<leader> 27j
+nnoremap 'sk<leader> 28j
+nnoremap 'sl<leader> 29j
+nnoremap 'd;<leader> 30j
+nnoremap [da<leader> 31j
+nnoremap [ds<leader> 32j
+nnoremap [dd<leader> 33j
+nnoremap [df<leader> 34j
+nnoremap [dg<leader> 35j
+nnoremap [dh<leader> 36j
+nnoremap [dj<leader> 37j
+nnoremap [dk<leader> 38j
+nnoremap [dl<leader> 39j
+nnoremap [f;<leader> 40j
+
+
 
 "map <LEADER>fd /\(\<\w\+\>\)\_s*\1
 
@@ -358,48 +562,49 @@ call plug#end()
 " ===
 " === airline
 " ===
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1     "开启顶部buffer功能"
-let g:airline#extensions#tabline#enabled = 1            "开启顶部buffer编号功能"
-if !exists('g:airline_symbols')
-   let g:airline_symbols = {}
-endif
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-
-
-" ===
-" === vim配色
-" ===
-"Solarized8
-set background=dark
-let g:solarized_italics=0
-colorscheme solarized8
-
-"monokai
-"syntax on
-"colorscheme monokai
-
-"gruvbox
-"set background=dark
-"let g:gruvbox8_italic=1
-"let g:gruvbox8_italicize_comments=1
-"colorscheme gruvbox8
-
-"space-vim-dark
-"colorscheme space-vim-dark
-"hi LineNr ctermbg=NONE guibg=NONE
-
-"colorscheme SpaceVim
-
-
+ let g:airline_powerline_fonts = 1
+ let g:airline#extensions#tabline#buffer_nr_show = 1     "开启顶部buffer功能"
+ let g:airline#extensions#tabline#enabled = 1            "开启顶部buffer编号功能"
+ if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+ endif
+ let g:airline_left_sep = ''
+ let g:airline_left_alt_sep = ''
+ let g:airline_right_sep = ''
+ let g:airline_right_alt_sep = ''
+"
+"
+"" ===
+"" === vim配色
+"" ===
+ "Solarized8
+ set background=dark
+ let g:solarized_italics=0
+ colorscheme solarized8
+"
+""monokai
+""syntax on
+""colorscheme monokai
+"
+""gruvbox
+""set background=dark
+""let g:gruvbox8_italic=1
+""let g:gruvbox8_italicize_comments=1
+""colorscheme gruvbox8
+"
+""space-vim-dark
+""colorscheme space-vim-dark
+""hi LineNr ctermbg=NONE guibg=NONE
+"
+""colorscheme SpaceVim
+"
+"
 " ===
 " === 文件树插件
 " ===
 " Nerdtree
-nnoremap  tt :NERDTreeToggle<cr>
+nnoremap  <silent><leader>n :NERDTreeToggle<cr>
+"nnoremap  tt :NERDTreeToggle<cr>
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
@@ -458,22 +663,21 @@ nnoremap T :TagbarToggle<cr>
 " ===
 " === echodoc.vim 在命令行显示函数提示
 " ===
-" echodoc.vim
 let g:echodoc_enable_at_startup = 1
 
 " ===
 " === easymotion
 " ===
 "光标快速跳转插件
-map <leader> <Plug>(easymotion-prefix)
-let g:EasyMotion_smartcase = 1
-"新版本中默认设置为<leader><leader> 为了避免于其他插件冲突 我设置s
-map <leader>w <Plug>(easymotion-bd-w)   
-nmap <leader>w <Plug>(easymotion-overwin-w)
-map <leader>l <Plug>(easymotion-lineforward)
-map <leader>h <Plug>(easymotion-linebackward)
-map <leader>j <Plug>(easymotion-j)
-map <leader>k <Plug>(easymotion-k)
+"map <leader> <Plug>(easymotion-prefix)
+"let g:EasyMotion_smartcase = 1
+""新版本中默认设置为<leader><leader> 为了避免于其他插件冲突 我设置s
+"map <leader>w <Plug>(easymotion-bd-w)   
+"nmap <leader>w <Plug>(easymotion-overwin-w)
+"map <leader>l <Plug>(easymotion-lineforward)
+"map <leader>h <Plug>(easymotion-linebackward)
+"map <leader>j <Plug>(easymotion-j)
+"map <leader>k <Plug>(easymotion-k)
 "let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 
 
@@ -660,4 +864,5 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 "let g:coc_snippet_prev =  '<leader>k'
 "imap <c-y> <Plug>(coc-snippets-expand-jump)
 "let g:snips_author = 'lsh'
+
 
