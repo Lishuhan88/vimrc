@@ -17,6 +17,8 @@ filetype on              " 设置开启文件类型侦测
 filetype indent on
 filetype plugin on       " 设置加载对应文件类型的插件
 let &t_ut=''             " 有的终端配色可能会不正常，加上这玩意可能好使
+set t_RS= t_SH=          " 某些终端中使用 Vim 8 内嵌终端如看到奇怪字符
+set t_TI= t_TE=          " 某些终端中使用 Vim 8.2+ 会看到一些奇怪字符
 set noeb                 " 关闭错误的提示
 syntax enable            " 开启语法高亮功能
 syntax on                " 自动语法高亮
@@ -29,7 +31,7 @@ set whichwrap+=<,>,h,l   " 设置光标键跨行
 set ttimeoutlen=0        " 设置<ESC>键响应时间
 set virtualedit=block,onemore   " 允许光标出现在最后一个字符的后面
 set number		 "开启行号
-set relativenumber	 "开启相对行号
+"set relativenumber	 "开启相对行号
 set cursorline		 "开启光标所在行高亮
 "set cursorcolumn	 "开启光标所在列高亮
 set wrap	         "超出屏幕的内容自动换行
@@ -232,37 +234,15 @@ nnoremap tl :+tabnext<CR>
 " ===
 " === buffer的相关操作
 " ===
-map ] <nop>
-nnoremap ]a<leader> :b1<CR>
-nnoremap ]s<leader> :b2<CR>
-nnoremap ]d<leader> :b3<CR>
-nnoremap ]f<leader> :b4<CR>
-nnoremap ]g<leader> :b5<CR>
-nnoremap ]h<leader> :b6<CR>
-nnoremap ]j<leader> :b7<CR>
-nnoremap ]k<leader> :b8<CR>
-nnoremap ]l<leader> :b9<CR>
-nnoremap ]a;<leader> :b10<CR>
-nnoremap ]aa<leader> :b11<CR>
-nnoremap ]as<leader> :b12<CR>
-nnoremap ]ad<leader> :b13<CR>
-nnoremap ]af<leader> :b14<CR>
-nnoremap ]ag<leader> :b15<CR>
-nnoremap ]ah<leader> :b16<CR>
-nnoremap ]aj<leader> :b17<CR>
-nnoremap ]ak<leader> :b18<CR>
-nnoremap ]al<leader> :b19<CR>
-nnoremap ]s;<leader> :b20<CR>
-nnoremap ]sa<leader> :b21<CR>
-nnoremap ]ss<leader> :b22<CR>
-nnoremap ]sd<leader> :b23<CR>
-nnoremap ]sf<leader> :b24<CR>
-nnoremap ]sg<leader> :b25<CR>
-nnoremap ]sh<leader> :b26<CR>
-nnoremap ]sj<leader> :b27<CR>
-nnoremap ]sk<leader> :b28<CR>
-nnoremap ]sl<leader> :b29<CR>
-nnoremap ]d;<leader> :b30<CR>
+nnoremap <leader>1 :b1<CR>
+nnoremap <leader>2 :b2<CR>
+nnoremap <leader>3 :b3<CR>
+nnoremap <leader>4 :b4<CR>
+nnoremap <leader>5 :b5<CR>
+nnoremap <leader>6 :b6<CR>
+nnoremap <leader>7 :b7<CR>
+nnoremap <leader>8 :b8<CR>
+nnoremap <leader>9 :b9<CR>
 
 if exists("g:vim_buffer_loaded")
     finish
@@ -354,96 +334,6 @@ nnoremap <c-h> :PreviousBuffer<cr>
 nnoremap <c-l> :NextBuffer<cr>
 nnoremap td :bd<cr>
 nnoremap tD :BufOnly<cr>
-
-" ===
-" === Vim综合征。。。
-" ===
-map ' <nop>
-map [ <nop>
-noremap , '
-
-nnoremap [a<leader> 1k
-nnoremap [s<leader> 2k
-nnoremap [d<leader> 3k
-nnoremap [f<leader> 4k
-nnoremap [g<leader> 5k
-nnoremap [h<leader> 6k
-nnoremap [j<leader> 7k
-nnoremap [k<leader> 8k
-nnoremap [l<leader> 9k
-nnoremap [a;<leader> 10k
-nnoremap [aa<leader> 11k
-nnoremap [as<leader> 12k
-nnoremap [ad<leader> 13k
-nnoremap [af<leader> 14k
-nnoremap [ag<leader> 15k
-nnoremap [ah<leader> 16k
-nnoremap [aj<leader> 17k
-nnoremap [ak<leader> 18k
-nnoremap [al<leader> 19k
-nnoremap [s;<leader> 20k
-nnoremap [sa<leader> 21k
-nnoremap [ss<leader> 22k
-nnoremap [sd<leader> 23k
-nnoremap [sf<leader> 24k
-nnoremap [sg<leader> 25k
-nnoremap [sh<leader> 26k
-nnoremap [sj<leader> 27k
-nnoremap [sk<leader> 28k
-nnoremap [sl<leader> 29k
-nnoremap [d;<leader> 30k
-nnoremap [da<leader> 31k
-nnoremap [ds<leader> 32k
-nnoremap [dd<leader> 33k
-nnoremap [df<leader> 34k
-nnoremap [dg<leader> 35k
-nnoremap [dh<leader> 36k
-nnoremap [dj<leader> 37k
-nnoremap [dk<leader> 38k
-nnoremap [dl<leader> 39k
-nnoremap [f;<leader> 40k
-
-nnoremap 'a<leader> 1j
-nnoremap 's<leader> 2j
-nnoremap 'd<leader> 3j
-nnoremap 'f<leader> 4j
-nnoremap 'g<leader> 5j
-nnoremap 'h<leader> 6j
-nnoremap 'j<leader> 7j
-nnoremap 'k<leader> 8j
-nnoremap 'l<leader> 9j
-nnoremap 'a;<leader> 10j
-nnoremap 'aa<leader> 11j
-nnoremap 'as<leader> 12j
-nnoremap 'ad<leader> 13j
-nnoremap 'af<leader> 14j
-nnoremap 'ag<leader> 15j
-nnoremap 'ah<leader> 16j
-nnoremap 'aj<leader> 17j
-nnoremap 'ak<leader> 18j
-nnoremap 'al<leader> 19j
-nnoremap 's;<leader> 20j
-nnoremap 'sa<leader> 21j
-nnoremap 'ss<leader> 22j
-nnoremap 'sd<leader> 23j
-nnoremap 'sf<leader> 24j
-nnoremap 'sg<leader> 25j
-nnoremap 'sh<leader> 26j
-nnoremap 'sj<leader> 27j
-nnoremap 'sk<leader> 28j
-nnoremap 'sl<leader> 29j
-nnoremap 'd;<leader> 30j
-nnoremap [da<leader> 31j
-nnoremap [ds<leader> 32j
-nnoremap [dd<leader> 33j
-nnoremap [df<leader> 34j
-nnoremap [dg<leader> 35j
-nnoremap [dh<leader> 36j
-nnoremap [dj<leader> 37j
-nnoremap [dk<leader> 38j
-nnoremap [dl<leader> 39j
-nnoremap [f;<leader> 40j
-
 
 
 "map <LEADER>fd /\(\<\w\+\>\)\_s*\1
@@ -544,7 +434,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'lifepillar/vim-solarized8'
 "Plug 'crusoexia/vim-monokai'
 "Plug 'sickill/vim-monokai'
-"Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 "Plug 'lifepillar/vim-gruvbox8'
 "Plug 'liuchengxu/space-vim-dark'
 
@@ -555,7 +445,8 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'Yggdroot/indentLine'
 
 " Error checking
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 call plug#end()
 
@@ -578,16 +469,18 @@ call plug#end()
 "" === vim配色
 "" ===
  "Solarized8
- set background=dark
- let g:solarized_italics=0
- colorscheme solarized8
+let g:solarized_italics=0  "让中文字体不倾斜
+set background=dark
+autocmd vimenter * ++nested colorscheme solarized8
+
 "
 ""monokai
 ""syntax on
 ""colorscheme monokai
 "
 ""gruvbox
-""set background=dark
+"autocmd vimenter * ++nested colorscheme gruvbox
+"set background=dark
 ""let g:gruvbox8_italic=1
 ""let g:gruvbox8_italicize_comments=1
 ""colorscheme gruvbox8
@@ -670,14 +563,14 @@ let g:echodoc_enable_at_startup = 1
 " ===
 "光标快速跳转插件
 "map <leader> <Plug>(easymotion-prefix)
-"let g:EasyMotion_smartcase = 1
-""新版本中默认设置为<leader><leader> 为了避免于其他插件冲突 我设置s
-"map <leader>w <Plug>(easymotion-bd-w)   
-"nmap <leader>w <Plug>(easymotion-overwin-w)
-"map <leader>l <Plug>(easymotion-lineforward)
-"map <leader>h <Plug>(easymotion-linebackward)
-"map <leader>j <Plug>(easymotion-j)
-"map <leader>k <Plug>(easymotion-k)
+let g:EasyMotion_smartcase = 1
+"新版本中默认设置为<leader><leader> 为了避免于其他插件冲突 我设置s
+map <leader>w <Plug>(easymotion-bd-w)   
+nmap <leader>w <Plug>(easymotion-overwin-w)
+map <leader>l <Plug>(easymotion-lineforward)
+map <leader>h <Plug>(easymotion-linebackward)
+map <leader>j <Plug>(easymotion-j)
+map <leader>k <Plug>(easymotion-k)
 "let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 
 
@@ -761,9 +654,9 @@ endif
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 " 去到上一个警告
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> gN <Plug>(coc-diagnostic-prev)
 " 去到下一个警告
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gn <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 " 转到定义
@@ -776,7 +669,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " 在预览窗口中显示文档
-nnoremap <silent> <leader>U :call <SID>show_documentation()<CR>
+nnoremap <silent> <leader>u :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -801,7 +694,8 @@ nmap <leader>c  <Plug>(coc-format-selected)
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  "autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd FileType typescript setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
@@ -827,7 +721,7 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
-" Remap <C-f> and <C-b> for scroll float windows/popups.
+" <C-f> 和 <C-b> 滚动悬浮窗口
 if has('nvim-0.4.0') || has('patch-8.2.0750')
   nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
   nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
@@ -864,5 +758,6 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 "let g:coc_snippet_prev =  '<leader>k'
 "imap <c-y> <Plug>(coc-snippets-expand-jump)
 "let g:snips_author = 'lsh'
+
 
 
