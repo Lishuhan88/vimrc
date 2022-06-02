@@ -165,7 +165,7 @@ map s <nop>
 map S :wall<CR>
 map Q :qall<CR>
 map q :q<CR>
-"map W :source $MYVIMRC<CR>
+map <leader>S :source $MYVIMRC<CR>
 nnoremap <leader>rc :edit ~/.vim/vimrc<CR>
 
 
@@ -179,6 +179,7 @@ noremap J 5j
 noremap <silent> H ^
 " 按L移动到行尾
 noremap <silent> L $
+inoremap <c-l> <esc>A
 
 " 快速行内移动
 noremap W 5w
@@ -434,9 +435,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'lifepillar/vim-solarized8'
 "Plug 'crusoexia/vim-monokai'
 "Plug 'sickill/vim-monokai'
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
 "Plug 'lifepillar/vim-gruvbox8'
 "Plug 'liuchengxu/space-vim-dark'
+"Plug 'arzg/vim-colors-xcode'
 
 "c/c++额外的语义高亮插件
 Plug 'octol/vim-cpp-enhanced-highlight'
@@ -447,6 +449,12 @@ Plug 'Yggdroot/indentLine'
 " Error checking
 "Plug 'w0rp/ale'
 Plug 'dense-analysis/ale'
+
+" 代码调试插件
+"Plug 'puremourning/vimspector',{'do':'./install_gadget.py --enable-c'}
+
+"沉浸式编写，阅读
+Plug 'junegunn/goyo.vim'
 
 call plug#end()
 
@@ -471,7 +479,15 @@ call plug#end()
  "Solarized8
 let g:solarized_italics=0  "让中文字体不倾斜
 set background=dark
+"set background=light
 autocmd vimenter * ++nested colorscheme solarized8
+
+"vscode
+"colorscheme xcodedark
+"colorscheme xcodedarkhc
+"colorscheme xcodelight
+"colorscheme xcodelighthc
+"colorscheme xcodewwdc
 
 "
 ""monokai
@@ -481,9 +497,10 @@ autocmd vimenter * ++nested colorscheme solarized8
 ""gruvbox
 "autocmd vimenter * ++nested colorscheme gruvbox
 "set background=dark
-""let g:gruvbox8_italic=1
-""let g:gruvbox8_italicize_comments=1
-""colorscheme gruvbox8
+"let g:gruvbox8_italic=1
+"let g:gruvbox8_italicize_comments=1
+"colorscheme gruvbox8
+
 "
 ""space-vim-dark
 ""colorscheme space-vim-dark
@@ -584,6 +601,16 @@ augroup END
 
 
 " ===
+" === 代码调试插件
+" ===
+
+" ===
+" === 沉浸式编写，阅读
+" ===
+map <LEADER>gy :Goyo<CR>
+
+
+" ===
 " === 自动补全coc.nvim lsp框架
 " ===
 let g:coc_global_extensions = [
@@ -602,15 +629,15 @@ set encoding=utf-8
 set hidden
 
 " Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
+"set nobackup
+"set nowritebackup
 
 " Give more space for displaying messages.
-set cmdheight=2
+"set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+set updatetime=100
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -638,12 +665,8 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
+" 按<c-@>调出自动补全
+inoremap <silent><expr> <c-@> coc#refresh()
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
@@ -721,14 +744,21 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
-" <C-f> 和 <C-b> 滚动悬浮窗口
+" <C-k> 和 <C-j> 滚动悬浮窗口
 if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  "nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  "nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  "inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  "inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  "vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  "vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+
+  nnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
 
 " Use CTRL-S for selections ranges.
@@ -752,12 +782,20 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "nnoremap tt :CocCommand explorer<CR> 
-"nnoremap tf :CocCommand translator.popup<CR>
+" coc-translator
+nmap ts <Plug>(coc-translator-p)
 
-"let g:coc_snippet_next =  '<leader>j'
-"let g:coc_snippet_prev =  '<leader>k'
-"imap <c-y> <Plug>(coc-snippets-expand-jump)
+" Use <C-l> for trigger snippet expand.
+"imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+"vmap <C-j> <Plug>(coc-snippets-select)
+
+let g:coc_snippet_next =  '<c-j>'
+let g:coc_snippet_prev =  '<c-k>'
+imap <c-y> <Plug>(coc-snippets-expand-jump)
 "let g:snips_author = 'lsh'
+
 
 
 
