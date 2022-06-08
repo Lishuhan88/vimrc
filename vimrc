@@ -31,8 +31,8 @@ set whichwrap+=<,>,h,l   " 设置光标键跨行
 set ttimeoutlen=0        " 设置<ESC>键响应时间
 set virtualedit=block,onemore   " 允许光标出现在最后一个字符的后面
 set number		 "开启行号
-"set relativenumber	 "开启相对行号
-set cursorline		 "开启光标所在行高亮
+set relativenumber	 "开启相对行号
+"set cursorline		 "开启光标所在行高亮
 "set cursorcolumn	 "开启光标所在列高亮
 set wrap	         "超出屏幕的内容自动换行
 set showcmd		 "在右下角显示当前输入的键
@@ -160,8 +160,10 @@ endif
 "把原有q键的宏录制功能改到\键
 "\键在vim键盘布局里是未使用任何功能的(原leader键)
 noremap \ q
-
+"noremap t '
+ 
 map s <nop>
+map ' <nop>
 map S :wall<CR>
 map Q :qall<CR>
 map q :q<CR>
@@ -182,8 +184,8 @@ noremap <silent> L $
 inoremap <c-l> <esc>A
 
 " 快速行内移动
-noremap W 5w
-noremap B 5b
+noremap W 3w
+noremap B 3b
 
 "缩进
 nnoremap < <<
@@ -358,7 +360,109 @@ map sb :set completeopt-=preview<CR>
 "map <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 
 " Call figlet
-map tx :r !figlet 
+"map tx :r !figlet 
+
+""光标移动
+noremap [a<LEADER> 1k
+noremap [s<LEADER> 2k
+noremap [d<LEADER> 3k
+noremap [f<LEADER> 4k
+noremap [g<LEADER> 5k
+noremap [h<LEADER> 6k
+noremap [j<LEADER> 7k
+noremap [k<LEADER> 8k
+noremap [l<LEADER> 9k
+noremap [;<LEADER> 10k
+noremap [aa<LEADER> 11k
+noremap [as<LEADER> 12k
+noremap [ad<LEADER> 13k
+noremap [af<LEADER> 14k
+noremap [ag<LEADER> 15k
+noremap [ah<LEADER> 16k
+noremap [aj<LEADER> 17k
+noremap [ak<LEADER> 18k
+noremap [al<LEADER> 19k
+noremap [s;<LEADER> 20k
+noremap [sa<LEADER> 21k
+noremap [ss<LEADER> 22k
+noremap [sd<LEADER> 23k
+noremap [sf<LEADER> 24k
+noremap [sg<LEADER> 25k
+noremap [sh<LEADER> 26k
+noremap [sj<LEADER> 27k
+noremap [sk<LEADER> 28k
+noremap [sl<LEADER> 29k
+noremap [d;<LEADER> 30k
+noremap [da<LEADER> 31k
+noremap [ds<LEADER> 32k
+noremap [dd<LEADER> 33k
+noremap [df<LEADER> 34k
+noremap [dg<LEADER> 35k
+noremap [dh<LEADER> 36k
+noremap [dj<LEADER> 37k
+noremap [dk<LEADER> 38k
+noremap [dl<LEADER> 39k
+noremap [f;<LEADER> 40k
+noremap [fa<LEADER> 41k
+noremap [fs<LEADER> 42k
+noremap [fd<LEADER> 43k
+noremap [ff<LEADER> 44k
+noremap [fg<LEADER> 45k
+noremap [fh<LEADER> 46k
+noremap [fj<LEADER> 47k
+noremap [fk<LEADER> 48k
+noremap [fl<LEADER> 49k
+
+
+noremap 'a<LEADER> 1j
+noremap 's<LEADER> 2j
+noremap 'd<LEADER> 3j
+noremap 'f<LEADER> 4j
+noremap 'g<LEADER> 5j
+noremap 'h<LEADER> 6j
+noremap 'j<LEADER> 7j
+noremap 'k<LEADER> 8j
+noremap 'l<LEADER> 9j
+noremap ';<LEADER> 10j
+noremap 'aa<LEADER> 11j
+noremap 'as<LEADER> 12j
+noremap 'ad<LEADER> 13j
+noremap 'af<LEADER> 14j
+noremap 'ag<LEADER> 15j
+noremap 'ah<LEADER> 16j
+noremap 'aj<LEADER> 17j
+noremap 'ak<LEADER> 18j
+noremap 'al<LEADER> 19j
+noremap 's;<LEADER> 20j
+noremap 'sa<LEADER> 21j
+noremap 'ss<LEADER> 22j
+noremap 'sd<LEADER> 23j
+noremap 'sf<LEADER> 24j
+noremap 'sg<LEADER> 25j
+noremap 'sh<LEADER> 26j
+noremap 'sj<LEADER> 27j
+noremap 'sk<LEADER> 28j
+noremap 'sl<LEADER> 29j
+noremap 'd;<LEADER> 30j
+noremap 'da<LEADER> 31j
+noremap 'ds<LEADER> 32j
+noremap 'dd<LEADER> 33j
+noremap 'df<LEADER> 34j
+noremap 'dg<LEADER> 35j
+noremap 'dh<LEADER> 36j
+noremap 'dj<LEADER> 37j
+noremap 'dk<LEADER> 38j
+noremap 'dl<LEADER> 39j
+noremap 'f;<LEADER> 40j
+noremap 'fa<LEADER> 41j
+noremap 'fs<LEADER> 42j
+noremap 'fd<LEADER> 43j
+noremap 'ff<LEADER> 44j
+noremap 'fg<LEADER> 45j
+noremap 'fh<LEADER> 46j
+noremap 'fj<LEADER> 47j
+noremap 'fk<LEADER> 48j
+noremap 'fl<LEADER> 49j
 
 
 
@@ -433,15 +537,19 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "配色方案
 Plug 'lifepillar/vim-solarized8'
-"Plug 'crusoexia/vim-monokai'
+Plug 'crusoexia/vim-monokai'
+Plug 'dracula/vim', { 'as': 'dracula' }
 "Plug 'sickill/vim-monokai'
-"Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 "Plug 'lifepillar/vim-gruvbox8'
 "Plug 'liuchengxu/space-vim-dark'
 "Plug 'arzg/vim-colors-xcode'
+Plug 'chriskempson/base16-vim'
+Plug 'nanotech/jellybeans.vim'
 
 "c/c++额外的语义高亮插件
 Plug 'octol/vim-cpp-enhanced-highlight'
+"Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 "代码对齐线
 Plug 'Yggdroot/indentLine'
@@ -476,30 +584,36 @@ call plug#end()
 "" ===
 "" === vim配色
 "" ===
- "Solarized8
+""Solarized8
 let g:solarized_italics=0  "让中文字体不倾斜
 set background=dark
 "set background=light
 autocmd vimenter * ++nested colorscheme solarized8
 
-"vscode
-"colorscheme xcodedark
-"colorscheme xcodedarkhc
-"colorscheme xcodelight
-"colorscheme xcodelighthc
-"colorscheme xcodewwdc
 
 "
 ""monokai
-""syntax on
-""colorscheme monokai
-"
+"syntax on
+"colorscheme monokai
+
+""dracula
+"let g:dracula_italic = 0 "禁止字体倾斜
+"colorscheme dracula
+
 ""gruvbox
 "autocmd vimenter * ++nested colorscheme gruvbox
 "set background=dark
 "let g:gruvbox8_italic=1
 "let g:gruvbox8_italicize_comments=1
 "colorscheme gruvbox8
+
+""base16
+"let base16colorspace=256  " Access colors present in 256 colorspace
+"colorscheme base16-default-dark
+
+""jellybeans
+"colorscheme jellybeans
+
 
 "
 ""space-vim-dark
@@ -795,7 +909,3 @@ let g:coc_snippet_next =  '<c-j>'
 let g:coc_snippet_prev =  '<c-k>'
 imap <c-y> <Plug>(coc-snippets-expand-jump)
 "let g:snips_author = 'lsh'
-
-
-
-
