@@ -372,7 +372,7 @@ noremap [h<LEADER> 6k
 noremap [j<LEADER> 7k
 noremap [k<LEADER> 8k
 noremap [l<LEADER> 9k
-noremap [;<LEADER> 10k
+noremap [a;<LEADER> 10k
 noremap [aa<LEADER> 11k
 noremap [as<LEADER> 12k
 noremap [ad<LEADER> 13k
@@ -423,7 +423,7 @@ noremap 'h<LEADER> 6j
 noremap 'j<LEADER> 7j
 noremap 'k<LEADER> 8j
 noremap 'l<LEADER> 9j
-noremap ';<LEADER> 10j
+noremap 'a;<LEADER> 10j
 noremap 'aa<LEADER> 11j
 noremap 'as<LEADER> 12j
 noremap 'ad<LEADER> 13j
